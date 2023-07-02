@@ -12,7 +12,7 @@ module.exports = {
 			grid: true
 		},
 		"postcss-pxtorem": {
-			rootValue: 64, // 设计稿宽度的1/ 10
+			rootValue: 75, // 设计稿宽度的1/ 10
 			propList: ["*", "!border"], // 除 border 外所有px 转 rem
 			selectorBlackList: [".van"] // 过滤
 		}

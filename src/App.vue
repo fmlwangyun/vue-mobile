@@ -1,9 +1,10 @@
 <template>
-  <van-button type="primary" @click="handleChangeLanguage">切换语言</van-button>
+  <img :src="languageIcon" alt="" class="language-btn" @click="handleChangeLanguage">
   <RouterView />
 </template>
 <script setup lang="ts">
 import {useLanguageStroe} from '@/store/language';
+import languageIcon from '@/assets/images/language.svg'
 const { changeLanguage } = useLanguageStroe()
 const handleChangeLanguage = () => {
   changeLanguage()
@@ -40,5 +41,12 @@ header {
 .title{
   width: 750px;
   font-size: 28px;
+}
+.language-btn{
+  width: 64px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 99;
 }
 </style>

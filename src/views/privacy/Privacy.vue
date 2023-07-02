@@ -10,20 +10,25 @@
             </div>
             <div class="content">
                 <div class="content-top">
-                    {{pageText.content}}
-                </div>
-                <div class="Pgifts">
-                    {{pageText.description1}} <br>{{pageText.description2}}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{pageText.description3}}
+                    {{pageText.content1}}<span class="keynote">{{pageText.content2}}</span>。
+<br>{{pageText.content3}}
+{{pageText.content4}}
                 </div>
             </div>
-            <div class="footerBtn">
-                <button class="btn">{{pageText.button}}</button>
+            <div>
+                <div class="disagreeBtn btnDiv">
+                    <button class="disagree btn">{{pageText.button1}}</button>
+                </div>
+                <div class="agreeBtn btnDiv">
+                    <button class="agree btn" @click="hanleNext">{{pageText.button2}}</button>
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import { PageDescriptionZh, PageDescriptionEn } from './config'
 import {useLanguageStroe} from '@/store/language';
 import { storeToRefs } from 'pinia'
@@ -32,8 +37,10 @@ const pageText = ref<object>(PageDescriptionZh)
 watch(isZH, (newValue, oldValue) => {
   pageText.value = newValue?PageDescriptionZh:PageDescriptionEn
 },{immediate:true});
-
-
+const router = useRouter()
+const hanleNext = () => {
+    router.push('/home')
+}
 </script>
 <style scoped>
     .homeDiv {
@@ -42,6 +49,7 @@ watch(isZH, (newValue, oldValue) => {
         color: #fff;
         .homeContent{
             width: 680px;
+            /* height: 880px; */
             border: 2px solid #4DF9FF;
             border-radius: 39px;
             margin: 0 auto;
@@ -61,8 +69,14 @@ watch(isZH, (newValue, oldValue) => {
             letter-spacing: 0em;
             margin-top: 100px;
             .content-top{
+                /* height: 538px; */
+            }
+            .keynote{
+                font-weight: 700;
+                text-decoration: underline;
             }
             .Pgifts{
+                height: 132px;
                 margin-top: 10px;
             }
         }
@@ -85,17 +99,16 @@ watch(isZH, (newValue, oldValue) => {
         .text {
             position: absolute;
             top: -36px;
-            left: 156px;
+            left: 197px;
             font-family: 思源黑体;
             font-size: 46px;
             font-weight: bold;
             letter-spacing: 0em;
         }
-        .footerBtn{
+        .btnDiv{
             position: absolute;
             bottom: -36px;
-            left: 188px;
-            width: 304px;
+            width: 220px;
             height: 72px;
             border-radius: 215px;
             background: linear-gradient(90deg, #53B7FF 0%, #2AA6FF 22%, #007EDB 75%, #0061A8 99%);
@@ -105,7 +118,7 @@ watch(isZH, (newValue, oldValue) => {
             box-shadow: 0px 0px 24px 0px #00DDFF;
             /* box-shadow: 10px 10px 15px -10px; */
             .btn{
-                width: 290px;
+                width: 210px;
                 height: 62px;
                 margin: 0 auto;
                 margin-top: 5px;
@@ -121,8 +134,14 @@ watch(isZH, (newValue, oldValue) => {
                 background: transparent;
                 border-radius: 31px;
                 justify-content: center;
-                color: #fff!important;
+                color: #fff
             }
+        }
+        .disagreeBtn {
+            left: 60px;
+        }
+        .agreeBtn {
+            right: 60px;
         }
     }
 </style>
